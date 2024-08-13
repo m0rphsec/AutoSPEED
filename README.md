@@ -1,4 +1,4 @@
-# AutoSPEED
+# AutoSPEED (Automated Scan Parse Enumerate Exploit Data Collection)
 Automating the easy stuff (for internal network pentesting).
 
 Tested on various Kali Linux versions (what else?)
