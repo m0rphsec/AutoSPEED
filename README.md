@@ -9,7 +9,11 @@ Automating the easy stuff (for internal network pentesting).
 - Metasploit IPMI scanning to automatically dump hashes of IPMI hosts if vulnerable.
 - Eyewitness scanning of all web URLs.
 
-## Dependancies
+## Dependencies
+
+Can be installed by running: 
+`sudo ./install-dependencies.sh`
+
 - Nmap (https://nmap.org/)
 - crackmapexec (https://github.com/byt3bl33d3r/CrackMapExec)
 - Metasploit Framework (https://www.metasploit.com/)
