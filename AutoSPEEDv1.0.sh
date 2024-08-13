@@ -487,7 +487,8 @@ echo -e "[${BLUE}*${RESET}] Running EyeWitness Scan...\n"
 webhosts=${varOutPath}web-urls.txt
 if [ -f "$webhosts" ]; then
     chmod 777 -R ${varWorkingDir}/${clientcode}
-    runuser -l agiopt -c "eyewitness -f ${varWorkingDir}/${clientcode}/scans/${clientcode}_parsed/web-urls.txt -d ${varWorkingDir}/${clientcode}/other/EyeWitness_output --no-prompt --threads 10 --delay 15"    
+    currentuser=$(who | cut -d " " -f 1 | head -1)
+    runuser -l $currentuser -c "eyewitness -f ${varWorkingDir}/${clientcode}/scans/${clientcode}_parsed/web-urls.txt -d ${varWorkingDir}/${clientcode}/other/EyeWitness_output --no-prompt --threads 10 --delay 15"    
     echo -e "\n[${BLUE}*${RESET}] EyeWitness scan completed. Check other directory for results.\n"
 else 
     echo -e "[${RED}!${RESET}] ${webhosts} does not exist. Skipping web url scanning.\n"
