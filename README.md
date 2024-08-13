@@ -51,3 +51,6 @@ A non-root account is required for EyeWitness to run correctly, as most browsers
 
 ### Example: Default Scan
 `sudo ./Autospeed.sh -c auto_test -t scope.txt`
+
+## Disclaimer
+As a general disclaimer: We are liable for any issues that may arise from the use of this tool. It is intended solely to assist, completely at a user's discretion, and proper due diligence should be performed before executing any tool on any network.
