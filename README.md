@@ -17,4 +17,4 @@ Automating the easy stuff (for internal network pentesting).
 
 ## Usage
 
-#sudo ./Autospeed.sh
+`sudo ./Autospeed.sh`
