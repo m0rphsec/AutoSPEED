@@ -1,7 +1,8 @@
-# AutoSPEED (Automated Scan Parse Enumerate Exploit Data)
-Automating the easy stuff (for internal network pentesting).
+# AutoSPEED
 
-Tested on various Kali Linux versions (what else?)
+**Auto**mated **S**can **P**arse **E**numerate **E**xploit **D**ata Collection
+
+*Automating the easy stuff (for internal network pentesting).*
 
 ## Current Capabilities
 - Nmap TCP/UDP/Egress scans on a provided scope with the ability to add an exclusion list.
@@ -10,6 +11,8 @@ Tested on various Kali Linux versions (what else?)
 - Metasploit RDP NLA checking with a file created with a list of hosts that do not have NLA enabled.
 - Metasploit IPMI scanning to automatically dump hashes of IPMI hosts if vulnerable.
 - Eyewitness scanning of all web URLs.
+
+<sub>Tested on various Kali Linux versions. (what else?)</sub>
 
 ## Dependencies
 
@@ -22,7 +25,7 @@ Can be installed by running:
 - eyewitness (https://github.com/RedSiege/EyeWitness)
 
 ## Usage
-From non-root account, use:
+From a non-root account, use:
 ```
 sudo ./AutoSpeed.sh (options)
               -h:  print help dialog
