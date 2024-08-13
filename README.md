@@ -1,6 +1,8 @@
 # AutoSPEED
 Automating the easy stuff (for internal network pentesting).
 
+Tested on various Kali Linux versions (what else?)
+
 ## Current Capabilities
 - Nmap TCP/UDP/Egress scans on a provided scope with the ability to add an exclusion list.
 - Parsing of the Nmap results into separate text files for use by other tools.
@@ -20,8 +22,9 @@ Can be installed by running:
 - eyewitness (https://github.com/RedSiege/EyeWitness)
 
 ## Usage
+From non-root account, use:
 ```
-sudo AutoSpeed.sh (options)
+sudo ./AutoSpeed.sh (options)
               -h:  print help dialog
               -c:  specify client code (AKA output folder name) (REQUIRED)
               -t:  specify target file with IP addresses or ranges to scan (REQUIRED)
@@ -38,6 +41,7 @@ sudo AutoSpeed.sh (options)
                    eu:  skip egress and UDP scanning
               -e:  specify exclusions file (OPTIONAL)
 ```
+A non-root account is required for EyeWitness to run correctly, as most browsers do not run correctly as root.
 
 ### Example: Print help dialog
 `sudo ./Autospeed.sh -h`
