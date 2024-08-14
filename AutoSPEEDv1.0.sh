@@ -445,17 +445,18 @@ sleep 2
 # crackmapexec time!
 
 echo -e "[${BLUE}*${RESET}] Running Crackmapexec...\n"
-crackmapexec smb $targetfile --gen-relay-list ./${clientcode}/smb/no_signing_hosts.txt | tee ./${clientcode}/smb/cme.out
-if [ -f "./${clientcode}/smb/no_signing_hosts.txt" ]; then
+crackmapexec smb $targetfile --gen-relay-list ./${clientcode}/smb/cme_relay_hosts.txt | tee ./${clientcode}/smb/cme.out
+if [ -f "./${clientcode}/smb/cme_relay_hosts.txt" ]; then
     echo -e "[${BLUE}+${RESET}] SMB relay targets list successfully generated."
-    numSigning=$(cat ./${clientcode}/smb/no_signing_hosts.txt | wc -l)
-    echo -e "[${BLUE}+${RESET}] $numSigning hosts can be relayed to."
+    numRelay=$(cat ./${clientcode}/smb/cme_relay_hosts.txt | wc -l)
+    echo -e "[${BLUE}+${RESET}] $numRelay hosts can be relayed to."
 else 
-    echo -e "[${RED}!${RESET}] No targets can be relayed to, but still parsing CME output for SMBv1 hosts.\n"
+    echo -e "[${RED}!${RESET}] No targets can be relayed to, but still parsing CME output.\n"
 fi
 cat ./${clientcode}/smb/cme.out | grep -a "signing:False" > ./${clientcode}/smb/no_signing.out
 cat ./${clientcode}/smb/cme.out | grep -a "SMBv1:True" > ./${clientcode}/smb/smbv1.out
-cat ./${clientcode}/smb/smbv1.out | cut -d ' ' -f 10 > ./${clientcode}/smb/smbv1_hosts.txt
+cat ./${clientcode}/smb/smbv1.out | cut -d ' ' -f 23 > ./${clientcode}/smb/smbv1_hosts.txt
+cat ./${clientcode}/smb/no_signing.out | cut -d ' ' -f 23 > ./${clientcode}/smb/no_signing_hosts.txt
 
 # file check and msfconsole rdp scanner
 
