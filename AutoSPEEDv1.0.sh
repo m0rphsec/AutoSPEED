@@ -442,10 +442,10 @@ fi
 
 sleep 2
 
-# crackmapexec time!
+# netexec time!
 
-echo -e "[${BLUE}*${RESET}] Running Crackmapexec...\n"
-crackmapexec smb $targetfile --gen-relay-list ./${clientcode}/smb/cme_relay_hosts.txt | tee ./${clientcode}/smb/cme.out
+echo -e "[${BLUE}*${RESET}] Running Netexec...\n"
+netexec smb $targetfile --gen-relay-list ./${clientcode}/smb/cme_relay_hosts.txt | tee ./${clientcode}/smb/cme.out
 if [ -f "./${clientcode}/smb/cme_relay_hosts.txt" ]; then
     echo -e "[${BLUE}+${RESET}] SMB relay targets list successfully generated."
     numRelay=$(cat ./${clientcode}/smb/cme_relay_hosts.txt | wc -l)
