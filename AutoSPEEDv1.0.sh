@@ -445,16 +445,16 @@ sleep 2
 # netexec time!
 
 echo -e "[${BLUE}*${RESET}] Running Netexec...\n"
-netexec smb $targetfile --gen-relay-list ./${clientcode}/smb/cme_relay_hosts.txt | tee ./${clientcode}/smb/cme.out
-if [ -f "./${clientcode}/smb/cme_relay_hosts.txt" ]; then
+netexec smb $targetfile --gen-relay-list ./${clientcode}/smb/nxc_relay_hosts.txt | tee ./${clientcode}/smb/nxc.out
+if [ -f "./${clientcode}/smb/nxc_relay_hosts.txt" ]; then
     echo -e "[${BLUE}+${RESET}] SMB relay targets list successfully generated."
-    numRelay=$(cat ./${clientcode}/smb/cme_relay_hosts.txt | wc -l)
+    numRelay=$(cat ./${clientcode}/smb/nxc_relay_hosts.txt | wc -l)
     echo -e "[${BLUE}+${RESET}] $numRelay hosts can be relayed to."
 else 
-    echo -e "[${RED}!${RESET}] No targets can be relayed to, but still parsing CME output.\n"
+    echo -e "[${RED}!${RESET}] No targets can be relayed to, but still parsing NXC output.\n"
 fi
-cat ./${clientcode}/smb/cme.out | grep -a "signing:False" > ./${clientcode}/smb/no_signing.out
-cat ./${clientcode}/smb/cme.out | grep -a "SMBv1:True" > ./${clientcode}/smb/smbv1.out
+cat ./${clientcode}/smb/nxc.out | grep -a "signing:False" > ./${clientcode}/smb/no_signing.out
+cat ./${clientcode}/smb/nxc.out | grep -a "SMBv1:True" > ./${clientcode}/smb/smbv1.out
 cat ./${clientcode}/smb/smbv1.out | cut -d ' ' -f 23 > ./${clientcode}/smb/smbv1_hosts.txt
 cat ./${clientcode}/smb/no_signing.out | cut -d ' ' -f 23 > ./${clientcode}/smb/no_signing_hosts.txt
 
