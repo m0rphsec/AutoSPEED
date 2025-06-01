@@ -443,7 +443,7 @@ fi
 
 sleep 2
 
-#CHMOD/CHOWN all directories/files
+# chown/chmod all directories/files in case $currentuser is used for running tools against scan data
 sudo chown -R "${currentuser}:${currentuser}" ${varWorkingDir}/${clientcode}
 sudo chmod -R u+rwX,go-rX ${varWorkingDir}/${clientcode}
 
@@ -497,3 +497,9 @@ if [ -f "$webhosts" ]; then
 else 
     echo -e "[${RED}!${RESET}] ${webhosts} does not exist. Skipping web url scanning.\n"
 fi
+
+# add any new tools/checks here or before
+
+# final chown/chmod operation on all directories/files - post ops to allow the current user to move/modify any file/directory in the $clientcode directory structure
+sudo chown -R "${currentuser}:${currentuser}" ${varWorkingDir}/${clientcode}
+sudo chmod -R u+rwX,go-rX ${varWorkingDir}/${clientcode}
