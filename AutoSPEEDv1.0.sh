@@ -204,6 +204,7 @@ varChangeOutDir="Y"
 varCustomOut="./${clientcode}/scans/${clientcode}_parsed"
 varOutPath="${varCustomOut}/"
 varWorkingDir="$(pwd)"
+currentuser="${SUDO_USER:-$USER}"
 
 # parsing function
 # parsing script (https://github.com/actuated/nmap-grep/blob/master/nmap-grep.sh)
@@ -442,6 +443,10 @@ fi
 
 sleep 2
 
+#CHMOD/CHOWN all directories/files
+sudo chown -R "${currentuser}:${currentuser}" ${varWorkingDir}/${clientcode}
+sudo chmod -R u+rwX,go-rX ${varWorkingDir}/${clientcode}
+
 # netexec time!
 
 echo -e "[${BLUE}*${RESET}] Running Netexec...\n"
@@ -487,8 +492,6 @@ fi
 echo -e "[${BLUE}*${RESET}] Running EyeWitness Scan...\n"
 webhosts=${varOutPath}web-urls.txt
 if [ -f "$webhosts" ]; then
-    chmod 777 -R ${varWorkingDir}/${clientcode}
-    currentuser=$(who | cut -d " " -f 1 | head -1)
     runuser -l $currentuser -c "eyewitness -f ${varWorkingDir}/${clientcode}/scans/${clientcode}_parsed/web-urls.txt -d ${varWorkingDir}/${clientcode}/other/EyeWitness_output --no-prompt --threads 10 --delay 15"    
     echo -e "\n[${BLUE}*${RESET}] EyeWitness scan completed. Check other directory for results.\n"
 else 
