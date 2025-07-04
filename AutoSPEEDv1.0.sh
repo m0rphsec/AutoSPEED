@@ -37,6 +37,62 @@ if [[ $(/usr/bin/id -u) -ne 0 ]]; then
     exit
 fi
 
+# DEPENDENCIES Declarations
+declare -A DEPS=(
+  [nmap]="apt-get install -y nmap"
+  [netexec]="apt-get install -y netexec"
+  [eyewitness]="apt-get install -y eyewitness"
+)
+
+# INSTALL FUNCTION
+install_dependencies() {
+  echo -e "[${BLUE}+${RESET}] Verifying required tools..."
+
+  local need_update=0
+
+  # Check simple deps
+  for cmd in "${!DEPS[@]}"; do
+    if command -v "$cmd" &>/dev/null; then
+      echo -e "[${BLUE}+${RESET}] $cmd is already installed."
+    else
+      echo -e "[${RED}!${RESET}] $cmd is missing."
+      need_update=1
+    fi
+  done
+
+  # If any simple deps are missing, update once and install them
+  if (( need_update )); then
+    echo -e "[${BLUE}+${RESET}] Installing missing packages..."
+    apt-get update
+    for cmd in "${!DEPS[@]}"; do
+      if ! command -v "$cmd" &>/dev/null; then
+        echo -e "[${BLUE}+${RESET}] Installing $cmd..."
+        ${DEPS[$cmd]}
+        echo -e "[${BLUE}+${RESET}] $cmd installation complete."
+      fi
+    done
+  fi
+
+  # Handle msfconsole separately
+  if command -v msfconsole &>/dev/null; then
+    echo -e "[${BLUE}+${RESET}] msfconsole is already installed."
+  else
+    echo -e "[${RED}!${RESET}] msfconsole is missing. Installing Metasploit Framework..."
+    curl -sSL \
+      https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb \
+      -o /tmp/msfinstall.erb
+    chmod +x /tmp/msfinstall.erb
+    /tmp/msfinstall.erb
+    rm /tmp/msfinstall.erb
+    echo -e "[${BLUE}+${RESET}] msfconsole installation complete."
+  fi
+
+  echo -e "[${BLUE}+${RESET}] All dependencies are satisfied."
+}
+
+# check and install dependencies
+install_dependencies
+
 # processing options
 
 while getopts 'c:t:s:e:o:h' opt; do
