@@ -7,7 +7,7 @@
 ## Current Capabilities
 - Nmap TCP/UDP/Egress scans on a provided scope with the ability to add an exclusion list.
 - Parsing of the Nmap results into separate text files for use by other tools.
-- CrackMapExec to generate screenshottable output as well as hosts that support SMBv1 or do not have SMB Signing enforced.
+- NetExec to generate screenshottable output as well as hosts that support SMBv1 or do not have SMB Signing enforced.
 - Metasploit RDP NLA checking with an output file created and a list of hosts that do not have NLA enabled.
 - Metasploit IPMI scanning to automatically dump hashes of IPMI hosts if vulnerable, with output files.
 - Eyewitness scanning of all web URLs.
@@ -16,13 +16,12 @@
 
 ## Dependencies
 
-Can be installed by running: 
-`sudo ./install-dependencies.sh`
+The following dependencies are automatically checked in the script and include:
 
 - Nmap (https://nmap.org/)
-- crackmapexec (https://github.com/byt3bl33d3r/CrackMapExec)
+- NetExec (https://github.com/Pennyw0rth/NetExec)
 - Metasploit Framework (https://www.metasploit.com/)
-- eyewitness (https://github.com/RedSiege/EyeWitness)
+- EyeWitness (https://github.com/RedSiege/EyeWitness)
 
 ## Usage
 From a non-root account, use:
