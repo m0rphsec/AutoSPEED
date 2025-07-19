@@ -543,6 +543,23 @@ else
     echo -e "[${RED}!${RESET}] $ipmihosts does not exist. Skipping IPMI scanning.\n"
 fi
 
+# file check and snmp-check
+
+echo -e "[${BLUE}*${RESET}] Running SNMP checks on first 5 hosts...\n"
+snmphosts=${varOutPath}snmp_hosts.txt
+
+if [ -f "$snmphosts" ]; then
+    head -n 5 "$snmphosts" | while IFS= read -r host; do
+        if [ -n "$host" ]; then
+            echo -e "[${BLUE}*${RESET}] snmp-check against ${host}...\n"
+            snmp-check "${host}" | tee -a "${varWorkingDir}/${clientcode}/other/snmp_check_${host}.out"
+        fi
+    done
+    echo -e "\n[${BLUE}*${RESET}] SNMP checks completed. Check other directory for results.\n"
+else
+    echo -e "[${RED}!${RESET}] ${snmphosts} does not exist. Skipping SNMP checks.\n"
+fi
+
 # file check and eyewitness
 
 echo -e "[${BLUE}*${RESET}] Running EyeWitness Scan...\n"
