@@ -598,9 +598,7 @@ spool ${varWorkingDir}/${clientcode}/other/ipmi_scan.out
 use auxiliary/scanner/ipmi/ipmi_dumphashes
 set RHOSTS file:${varWorkingDir}/${varOutPath#./}ipmi_hosts.txt
 set THREADS ${ipmithreads}
-set CRACK_COMMON false
 set OUTPUT_HASHCAT_FILE ${varWorkingDir}/${clientcode}/other/ipmi_hashcat.txt
-set OUTPUT_JOHN_FILE ${varWorkingDir}/${clientcode}/other/ipmi_john.txt
 set SESSION_MAX_ATTEMPTS ${IPMI_MAX_ATTEMPTS}
 set SESSION_RETRY_DELAY ${IPMI_RETRY_DELAY}
 run
